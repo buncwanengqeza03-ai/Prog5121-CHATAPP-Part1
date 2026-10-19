@@ -1,61 +1,60 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt
- * to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java
- * to edit this template
- */
-
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt
+to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java
+to edit this template
+*/
 package com.mycompany.chatapppart1;
 
 import java.util.Scanner;
 
 /**
- * The Main class controls the ChatApp registration and login process.
- * It collects information from the user through keyboard input and
- * uses the Login class to validate the supplied details.
+ * The Main class runs the ChatApp application.
+ * It accepts keyboard input from the user and controls
+ * the registration and login process.
  *
  * @author Student
  */
 public class Main {
 
     /*
-     * The main method starts the ChatApp application.
+     * The main method is the starting point of the application.
      */
     public static void main(String[] args) {
 
-        // Set up Scanner to receive information entered by the user.
+        // Create a Scanner object to accept keyboard input from the user.
         Scanner input = new Scanner(System.in);
 
-        // Show the registration section to the user.
+        // Display the registration heading.
         System.out.println("=====REGISTRATION=====");
 
-        // Request the user's first name.
+        // Ask the user to enter their first name.
         System.out.print("Enter your first name: ");
         String firstName = input.nextLine();
 
-        // Continue requesting the first name until a value is provided.
+        //this ensures that the user cannot continue without entering their first name.
         while (firstName.trim().isEmpty()) {
             System.out.println("First name cannot be empty.");
             System.out.print("Enter your first name: ");
             firstName = input.nextLine();
         }
 
-        // Request the user's surname.
+        // Ask the user to enter their last name.
         System.out.print("Enter your last name: ");
         String lastName = input.nextLine();
 
-        // Prevent the registration process from continuing without a surname.
+        //this ensures that the user cannot continue without entering their last name.
         while (lastName.trim().isEmpty()) {
             System.out.println("Last name cannot be empty.");
             System.out.print("Enter your last name: ");
             lastName = input.nextLine();
         }
 
-        // Request a username from the user.
+        // Ask the user to enter their username.
         System.out.print("Enter your username: ");
         String username = input.nextLine();
 
-        // Make sure a username has been entered before continuing.
+        //this ensures that the user cannot continue without entering their username.
         while (username.trim().isEmpty()) {
             System.out.println("Username cannot be empty.");
             System.out.print("Enter your username: ");
@@ -63,9 +62,9 @@ public class Main {
         }
 
         /*
-         * Create the Login object using the details collected so far.
-         * The password and cellphone number are initially left blank
-         * because they will be supplied later.
+         * Create a Login object using the information captured so far.
+         * The password and cellphone number are temporarily empty because
+         * they have not been entered yet.
          */
         Login login = new Login(
                 firstName,
@@ -75,7 +74,7 @@ public class Main {
                 ""
         );
 
-        // Validate the username before requesting the password.
+        // Check the username before continuing to the password.
         if (!login.checkUserName()) {
             System.out.println(
                     "Username is not correctly formatted; please ensure that your username "
@@ -84,21 +83,23 @@ public class Main {
             return;
         }
 
-        // Request the user's password.
+        //Displays this message if username is valid.
+        System.out.println("Username successfully captured.");
+
+        // Ask the user to enter their password.
         System.out.print("Enter your password: ");
         String password = input.nextLine();
 
-        // Ensure that the password field is not left blank.
         while (password.trim().isEmpty()) {
             System.out.println("Password cannot be empty.");
             System.out.print("Enter your password: ");
             password = input.nextLine();
         }
 
-        // Save the password in the Login object.
+        // Store the password in the Login object.
         login.setPassword(password);
 
-        // Validate the password before proceeding with the registration.
+        // Check the password before continuing to the cellphone number.
         if (!login.checkPasswordComplexity()) {
             System.out.println(
                     "Password is not correctly formatted; please ensure that the password "
@@ -108,21 +109,23 @@ public class Main {
             return;
         }
 
-        // Request the user's cellphone number.
+        //Displays this message if password is valid.
+        System.out.println("Password successfully captured.");
+
+        // Ask the user to enter their cellphone number.
         System.out.print("Enter your cellphone number: ");
         String phoneNumber = input.nextLine();
 
-        // Make sure a cellphone number has been entered.
         while (phoneNumber.trim().isEmpty()) {
             System.out.println("Cellphone number cannot be empty.");
             System.out.print("Enter your cellphone number: ");
             phoneNumber = input.nextLine();
         }
 
-        // Add the cellphone number to the Login object.
+        // Store the cellphone number in the Login object.
         login.setPhoneNumber(phoneNumber);
 
-        // Check the cellphone number before allowing the user to continue.
+        // Check the cellphone number before continuing to login.
         if (!login.checkCellPhoneNumber()) {
             System.out.println(
                     "Cellphone number is not correctly formatted; please ensure that the "
@@ -131,51 +134,231 @@ public class Main {
             return;
         }
 
-        /*
-         * All registration details have passed validation.
-         * Display the messages confirming the successful registration.
-         */
-        System.out.println();
-        System.out.println(login.registerUser());
+        //Displays this message if cellphone number is valid.
+        System.out.println("Cellphone number successfully added.");
 
-        // Display the login section.
+        // Display the login heading.
         System.out.println();
         System.out.println("=====LOGIN=====");
 
-        // Request the username used during registration.
+        // Ask the user to enter their username.
         System.out.print("Enter your username: ");
         String enteredUsername = input.nextLine();
 
-        // Ensure that the login username is not left blank.
         while (enteredUsername.trim().isEmpty()) {
             System.out.println("Username cannot be empty.");
             System.out.print("Enter your username: ");
             enteredUsername = input.nextLine();
         }
 
-        // Check that the entered username matches the registered username.
+        // Check whether the entered username matches the registered username.
         if (!enteredUsername.equals(login.getUsername())) {
             System.out.println("Username or password incorrect, please try again.");
             return;
         }
 
-        // Request the password for the login attempt.
+        // Ask the user to enter their password.
         System.out.print("Enter your password: ");
         String enteredPassword = input.nextLine();
 
-        // Prevent the login process from continuing with an empty password.
         while (enteredPassword.trim().isEmpty()) {
             System.out.println("Password cannot be empty.");
             System.out.print("Enter your password: ");
             enteredPassword = input.nextLine();
         }
 
-        // Save the login credentials entered by the user.
+        // Store the username and password entered during login.
         login.setEnteredUsername(enteredUsername);
         login.setEnteredPassword(enteredPassword);
 
-        // Display the result of the login verification.
+        // Check whether the login credentials are correct.
+        if (!login.loginUser()) {
+            System.out.println(login.returnLoginStatus());
+            return;
+        }
+
+        // Display the successful login message.
         System.out.println(login.returnLoginStatus());
+        System.out.println("Welcome to QuickChat.");
+
+        // Ask how many messages the user wants to enter.
+        System.out.print("How many messages would you like to send? ");
+        int messageLimit;
+
+        while (true) {
+            String numberInput = input.nextLine();
+
+            try {
+                messageLimit = Integer.parseInt(numberInput);
+
+                if (messageLimit >= 1) {
+                    break;
+                }
+
+                System.out.print("Please enter at least 1 message: ");
+
+            } catch (NumberFormatException e) {
+                System.out.print("Invalid input. Enter a whole number: ");
+            }
+        }
+
+        // Track how many messages have been processed.
+        int messagesEntered = 0;
+        Message lastMessage = null;
+
+        // Display the QuickChat menu until the user chooses to quit.
+        while (true) {
+            System.out.println();
+            System.out.println("===== QUICKCHAT MENU =====");
+            System.out.println("1) Send messages");
+            System.out.println("2) Show recently sent messages");
+            System.out.println("3) Quit");
+            System.out.print("Choose an option: ");
+
+            String menuChoice = input.nextLine();
+
+            switch (menuChoice) {
+                case "1":
+                    // Check whether the message limit has been reached.
+                    if (messagesEntered >= messageLimit) {
+                        System.out.println(
+                                "You have reached your message limit."
+                        );
+                        break;
+                    }
+
+                    // Ask for the recipient's cellphone number.
+                    System.out.print("Enter recipient cellphone number: ");
+                    String recipient = input.nextLine();
+
+                    // Create a temporary object only for validation.
+                    // NOTE: We will improve this when we finish Message.java.
+                    Message recipientCheck =
+                            new Message("0000000000", recipient, "Validation", 0);
+
+                    String recipientStatus =
+                            recipientCheck.checkRecipientCell();
+
+                    if (!recipientStatus.equals(
+                            "Cell phone number successfully captured.")) {
+                        System.out.println(recipientStatus);
+                        break;
+                    }
+
+                    // Ask for the message text.
+                    System.out.print("Enter your message: ");
+                    String messageText = input.nextLine();
+
+                    // Check that the message is not empty or too long.
+                    if (messageText.trim().isEmpty()) {
+                        System.out.println("Message cannot be empty.");
+                        break;
+                    }
+
+                    if (messageText.length() > 250) {
+                        System.out.println(
+                                "Message exceeds 250 characters by "
+                                + (messageText.length() - 250)
+                                + "; please reduce the size."
+                        );
+                        break;
+                    }
+
+                    // Create the message object.
+                    Message message = new Message(
+                            recipient, messageText
+                    );
+
+                    // Generate and display the message hash.
+                    System.out.println(
+                            "Message Hash: " + message.createMessageHash()
+                    );
+
+                    // Ask the user what to do with the message.
+                    System.out.println("1) Send Message");
+                    System.out.println("2) Disregard Message");
+                    System.out.println("3) Store Message");
+                    System.out.print("Choose an option: ");
+
+                    String actionChoice = input.nextLine();
+
+                    // Process the selected action.
+                    String actionResult =
+                            message.sentMessage(actionChoice);
+
+                    System.out.println(actionResult);
+
+                    // If the user chooses to disregard the message,
+                    // ask them to confirm deletion by entering 0.
+                    if (actionChoice.equals("2")) {
+                        System.out.print("Enter 0 to delete the message: ");
+                        String deleteChoice = input.nextLine();
+
+                        if (deleteChoice.equals("0")) {
+                            System.out.println("Message deleted.");
+                        } else {
+                            System.out.println("Invalid input. Message was not deleted.");
+                        }
+                    }
+
+                    // Display message details only when it is sent.
+                    if (actionChoice.equals("1")
+                            && actionResult.equals(
+                                    "Message successfully sent.")) {
+                        System.out.println(
+                                "Message ID: " + message.getMessageID()
+                        );
+                        System.out.println(
+                                "Recipient: " + recipient
+                        );
+                        System.out.println(
+                                "Message: " + messageText
+                        );
+                    }
+
+                    // Save the message as the most recently processed message.
+                    lastMessage = message;
+
+                    // Increase the count only after a valid action is selected.
+                    if (actionChoice.equals("1")
+                            || actionChoice.equals("2")
+                            || actionChoice.equals("3")) {
+                        messagesEntered++;
+                    }
+
+                    break;
+
+                case "2":
+                    // Display the messages that have been successfully sent.
+                    if (lastMessage == null) {
+                        System.out.println("No messages have been sent yet.");
+                    } else {
+                        System.out.println("===== RECENTLY SENT MESSAGES =====");
+                        System.out.println(lastMessage.printMessages());
+                    }
+                    break;
+
+                case "3":
+                    // Exit the QuickChat menu.
+                    System.out.println("Exiting QuickChat.");
+
+                    if (lastMessage != null) {
+                        System.out.println(
+                                "Total messages sent: "
+                                + lastMessage.returnTotalMessages()
+                        );
+                    } else {
+                        System.out.println("Total messages sent: 0");
+                    }
+
+                    input.close();
+                    return;
+
+                default:
+                    System.out.println(
+                            "Invalid option. Please choose 1, 2, or 3."
+                    );
+            }
+        }
     }
 }
-
