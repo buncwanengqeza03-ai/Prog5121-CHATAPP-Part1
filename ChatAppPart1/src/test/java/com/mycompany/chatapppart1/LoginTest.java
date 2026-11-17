@@ -1,8 +1,9 @@
-
 /*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
-*/
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt
+ * to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java
+ * to edit this template
+ */
 package com.mycompany.chatapppart1;
 
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,7 @@ public class LoginTest {
      */
     @Test
     public void testValidUserName() {
+
         // Create a Login object with valid registration information.
         Login login = new Login(
                 "kyl_1",
@@ -48,6 +50,7 @@ public class LoginTest {
      */
     @Test
     public void testValidPasswordComplexity() {
+
         // Create a Login object with a valid password.
         Login login = new Login(
                 "kyl_1",
@@ -55,7 +58,9 @@ public class LoginTest {
                 "+27838968976"
         );
 
-        // Check that the password complexity method returns true.
+        /*
+         * Check that the password complexity method returns true.
+         */
         assertTrue(login.checkPasswordComplexity());
     }
 
@@ -67,6 +72,7 @@ public class LoginTest {
      */
     @Test
     public void testValidCellPhoneNumber() {
+
         // Creates a Login object with a valid cellphone number.
         Login login = new Login(
                 "kyl_1",
@@ -86,6 +92,7 @@ public class LoginTest {
      */
     @Test
     public void testRegisterUser() {
+
         // Creates a Login object using valid registration details.
         Login login = new Login(
                 "kyl_1",
@@ -100,12 +107,12 @@ public class LoginTest {
          * Compare the expected registration messages with
          * the actual message returned by the method.
          */
-        assertEquals(
-                "Username successfully captured.\n"
-                + "Password successfully captured.\n"
-                + "Cell phone number successfully added.\n",
-                result
-        );
+        assertEquals("""
+                Username successfully captured.
+                Password successfully captured.
+                Cell phone number successfully added.
+                """,
+                result);
     }
 
     /**
@@ -116,6 +123,7 @@ public class LoginTest {
      */
     @Test
     public void testLoginUser() {
+
         // Creates a Login object using registered credentials.
         Login login = new Login(
                 "kyl_1",
@@ -141,10 +149,11 @@ public class LoginTest {
      */
     @Test
     public void testReturnLoginStatus() {
+
         // Creates a Login object using valid registration details.
         Login login = new Login(
                 "Kyle",
-                "Ngqeza",
+                "Makhohliso",
                 "kyl_1",
                 "Ch&&sec@ke99!",
                 "+27838968976"
@@ -161,7 +170,7 @@ public class LoginTest {
          * when the login credentials are correct.
          */
         assertEquals(
-                "Welcome Kyle Ngqeza, it is great to see you again.",
+                "Welcome Kyle Makhohliso, it is great to see you again.",
                 login.returnLoginStatus()
         );
     }
@@ -174,7 +183,8 @@ public class LoginTest {
      */
     @Test
     public void testInvalidUserName() {
-        // Creates a Login object using invalid registration details.
+
+        // Creates a login object using invalid registration details.
         Login login = new Login(
                 "kyle!!!!!!!",
                 "Ch&&sec@ke99!",
@@ -188,19 +198,20 @@ public class LoginTest {
     /**
      * Test of checkPasswordComplexity() method with an invalid password.
      *
-     * This test uses a password that does not contain the required
-     * uppercase letter, number, and special character.
+     * This test uses a password that does not contain an uppercase
+     * letter, number, and special character as per requirements.
      */
     @Test
     public void testInvalidPasswordComplexity() {
-        // Creates a Login object using invalid registration details.
+
+        // Creates a login object using invalid registration details.
         Login login = new Login(
                 "kyl_1",
                 "password",
                 "+27838968976"
         );
 
-        // Check that the password validation returns false.
+        // Check that the password validation will return false.
         assertFalse(login.checkPasswordComplexity());
     }
 
@@ -212,7 +223,8 @@ public class LoginTest {
      */
     @Test
     public void testInvalidPhoneNumber() {
-        // Creates a Login object using invalid registration details.
+
+        // Creates a login object using invalid registration details.
         Login login = new Login(
                 "kyl_1",
                 "Ch&&sec@ke99!",
@@ -231,6 +243,7 @@ public class LoginTest {
      */
     @Test
     public void testInvalidRegisterUser() {
+
         // Creates a Login object using invalid registration details.
         Login login = new Login(
                 "kyle!!!!!!!",
@@ -245,12 +258,12 @@ public class LoginTest {
          * Compare the expected error messages with
          * the actual message returned by the method.
          */
-        assertEquals(
-                "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.\n"
-                + "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.\n"
-                + "Cell phone number incorrectly formatted or does not contain international code.\n",
-                result
-        );
+        assertEquals("""
+                Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.
+                Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.
+                Cell phone number incorrectly formatted or does not contain international code.
+                """,
+                result);
     }
 
     /**
@@ -261,6 +274,7 @@ public class LoginTest {
      */
     @Test
     public void testInvalidLoginUser() {
+
         // Creates a Login object using valid registered details.
         Login login = new Login(
                 "kyl_1",
@@ -286,6 +300,7 @@ public class LoginTest {
      */
     @Test
     public void testInvalidReturnLoginStatus() {
+
         // Creates a Login object using valid registered details.
         Login login = new Login(
                 "kyl_1",

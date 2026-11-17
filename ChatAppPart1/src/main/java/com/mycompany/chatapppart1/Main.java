@@ -1,9 +1,9 @@
+
 /*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt
-to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java
-to edit this template
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
 */
+
 package com.mycompany.chatapppart1;
 
 import java.util.Scanner;
@@ -32,7 +32,7 @@ public class Main {
         System.out.print("Enter your first name: ");
         String firstName = input.nextLine();
 
-        //this ensures that the user cannot continue without entering their first name.
+        // This ensures that the user cannot continue without entering their first name.
         while (firstName.trim().isEmpty()) {
             System.out.println("First name cannot be empty.");
             System.out.print("Enter your first name: ");
@@ -43,7 +43,7 @@ public class Main {
         System.out.print("Enter your last name: ");
         String lastName = input.nextLine();
 
-        //this ensures that the user cannot continue without entering their last name.
+        // This ensures that the user cannot continue without entering their last name.
         while (lastName.trim().isEmpty()) {
             System.out.println("Last name cannot be empty.");
             System.out.print("Enter your last name: ");
@@ -54,7 +54,7 @@ public class Main {
         System.out.print("Enter your username: ");
         String username = input.nextLine();
 
-        //this ensures that the user cannot continue without entering their username.
+        // This ensures that the user cannot continue without entering their username.
         while (username.trim().isEmpty()) {
             System.out.println("Username cannot be empty.");
             System.out.print("Enter your username: ");
@@ -83,7 +83,7 @@ public class Main {
             return;
         }
 
-        //Displays this message if username is valid.
+        // Displays this message if username is valid.
         System.out.println("Username successfully captured.");
 
         // Ask the user to enter their password.
@@ -109,7 +109,7 @@ public class Main {
             return;
         }
 
-        //Displays this message if password is valid.
+        // Displays this message if password is valid.
         System.out.println("Password successfully captured.");
 
         // Ask the user to enter their cellphone number.
@@ -134,7 +134,7 @@ public class Main {
             return;
         }
 
-        //Displays this message if cellphone number is valid.
+        // Displays this message if cellphone number is valid.
         System.out.println("Cellphone number successfully added.");
 
         // Display the login heading.
@@ -183,6 +183,7 @@ public class Main {
 
         // Ask how many messages the user wants to enter.
         System.out.print("How many messages would you like to send? ");
+
         int messageLimit;
 
         while (true) {
@@ -208,22 +209,24 @@ public class Main {
 
         // Display the QuickChat menu until the user chooses to quit.
         while (true) {
+
             System.out.println();
             System.out.println("===== QUICKCHAT MENU =====");
             System.out.println("1) Send messages");
             System.out.println("2) Show recently sent messages");
             System.out.println("3) Quit");
+            System.out.println("4)Stored messages");
             System.out.print("Choose an option: ");
 
             String menuChoice = input.nextLine();
 
             switch (menuChoice) {
+
                 case "1":
+
                     // Check whether the message limit has been reached.
                     if (messagesEntered >= messageLimit) {
-                        System.out.println(
-                                "You have reached your message limit."
-                        );
+                        System.out.println("You have reached your message limit.");
                         break;
                     }
 
@@ -232,7 +235,6 @@ public class Main {
                     String recipient = input.nextLine();
 
                     // Create a temporary object only for validation.
-                    // NOTE: We will improve this when we finish Message.java.
                     Message recipientCheck =
                             new Message("0000000000", recipient, "Validation", 0);
 
@@ -265,9 +267,10 @@ public class Main {
                     }
 
                     // Create the message object.
-                    Message message = new Message(
-                            recipient, messageText
-                    );
+                    Message message = new Message(recipient, messageText);
+
+                    // Assign the registered user's cellphone number as the sender.
+                    message.setSender(phoneNumber);
 
                     // Generate and display the message hash.
                     System.out.println(
@@ -283,9 +286,7 @@ public class Main {
                     String actionChoice = input.nextLine();
 
                     // Process the selected action.
-                    String actionResult =
-                            message.sentMessage(actionChoice);
-
+                    String actionResult = message.sentMessage(actionChoice);
                     System.out.println(actionResult);
 
                     // If the user chooses to disregard the message,
@@ -297,23 +298,19 @@ public class Main {
                         if (deleteChoice.equals("0")) {
                             System.out.println("Message deleted.");
                         } else {
-                            System.out.println("Invalid input. Message was not deleted.");
+                            System.out.println(
+                                    "Invalid input. Message was not deleted."
+                            );
                         }
                     }
 
                     // Display message details only when it is sent.
                     if (actionChoice.equals("1")
-                            && actionResult.equals(
-                                    "Message successfully sent.")) {
-                        System.out.println(
-                                "Message ID: " + message.getMessageID()
-                        );
-                        System.out.println(
-                                "Recipient: " + recipient
-                        );
-                        System.out.println(
-                                "Message: " + messageText
-                        );
+                            && actionResult.equals("Message successfully sent.")) {
+
+                        System.out.println("Message ID: " + message.getMessageID());
+                        System.out.println("Recipient: " + recipient);
+                        System.out.println("Message: " + messageText);
                     }
 
                     // Save the message as the most recently processed message.
@@ -329,6 +326,7 @@ public class Main {
                     break;
 
                 case "2":
+
                     // Display the messages that have been successfully sent.
                     if (lastMessage == null) {
                         System.out.println("No messages have been sent yet.");
@@ -336,9 +334,11 @@ public class Main {
                         System.out.println("===== RECENTLY SENT MESSAGES =====");
                         System.out.println(lastMessage.printMessages());
                     }
+
                     break;
 
                 case "3":
+
                     // Exit the QuickChat menu.
                     System.out.println("Exiting QuickChat.");
 
@@ -354,11 +354,134 @@ public class Main {
                     input.close();
                     return;
 
+                case "4":
+
+                    Message storedMessageManager = new Message("", "");
+
+                    // Load stored messages from the JSON file.
+                    String loadResult =
+                            storedMessageManager.readStoredMessages();
+
+                    System.out.println(loadResult);
+
+                    // Keep the rest of your Stored Messages submenu here.
+                    boolean storedMenuRunning = true;
+
+                    while (storedMenuRunning) {
+
+                        System.out.println();
+                        System.out.println("===== STORED MESSAGES MENU =====");
+                        System.out.println("1) Display sender and recipient");
+                        System.out.println("2) Display longest message");
+                        System.out.println("3) Search message by ID");
+                        System.out.println("4) Search messages by recipient");
+                        System.out.println("5) Delete message using hash");
+                        System.out.println("6) Display full message report");
+                        System.out.println("7) Return to QuickChat menu");
+                        System.out.print("Choose an option: ");
+
+                        String storedChoice = input.nextLine();
+
+                        switch (storedChoice) {
+
+                            case "1":
+
+                                // Display sender and recipient.
+                                System.out.println(
+                                        storedMessageManager.displaySenderAndRecipient()
+                                );
+
+                                break;
+
+                            case "2":
+
+                                // Display the longest stored message.
+                                System.out.println(
+                                        storedMessageManager.displayLongestMessage()
+                                );
+
+                                break;
+
+                            case "3":
+
+                                // Search for a message using its ID.
+                                System.out.print("Enter message ID: ");
+                                String searchID = input.nextLine();
+
+                                System.out.println(
+                                        storedMessageManager.searchMessageByID(searchID)
+                                );
+
+                                break;
+
+                            case "4":
+
+                                // Search for messages using a recipient number.
+                                System.out.print("Enter recipient cellphone number: ");
+                                String searchRecipient = input.nextLine();
+
+                                System.out.println(
+                                        storedMessageManager.searchMessagesByRecipient(
+                                                searchRecipient
+                                        )
+                                );
+
+                                break;
+
+                            case "5":
+
+                                // Delete a message using its hash.
+                                System.out.print("Enter message hash: ");
+                                String searchHash = input.nextLine();
+
+                                System.out.println(
+                                        storedMessageManager.deleteMessageByHash(searchHash)
+                                );
+
+                                break;
+
+                            case "6":
+
+                                // Display the full message report.
+                                System.out.println(
+                                        storedMessageManager.displayMessageReport()
+                                );
+
+                                break;
+
+                            case "7":
+
+                                // Return to the main QuickChat Menu.
+                                storedMenuRunning = false;
+
+                                break;
+
+                            default:
+
+                                System.out.println(
+                                        "Invalid option. Please try again."
+                                );
+
+                                break;
+
+                        } // Closes switch (storedChoice)
+
+                    } // Closes while (storedMenuRunning)
+
+                    break; // Exits case "4"
+
                 default:
+
                     System.out.println(
-                            "Invalid option. Please choose 1, 2, or 3."
+                            "Invalid option. Please choose 1, 2, 3, or 4."
                     );
-            }
-        }
-    }
-}
+
+                    break;
+
+            } // Closes switch (menuChoice)
+
+        } // Closes while (true)
+
+    } // Closes main method
+
+} // Closes Main class
